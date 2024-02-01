@@ -23,7 +23,7 @@ type ResourceSkillsProps = {
   resourceId: string;
 };
 
-export default function ResourceSkills({ resourceId }: ResourceSkillsProps) {
+const ResourceSkills = ({ resourceId }: ResourceSkillsProps) => {
   const {
     data: resourceData,
     isLoading,
@@ -52,4 +52,6 @@ export default function ResourceSkills({ resourceId }: ResourceSkillsProps) {
       </List>
     </Container>
   );
-}
+};
+
+export default ResourceSkills;

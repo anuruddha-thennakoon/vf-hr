@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ResourceOverview from "./ResourceOverview";
 import ResourceSkills from "./ResourceSkills";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ type ResourceViewProps = {
   selectedResource: ResourceType;
 };
 
-export default function ResourceView({ selectedResource }: ResourceViewProps) {
+const ResourceView = ({ selectedResource }: ResourceViewProps) => {
   console.log("selectedResource", selectedResource);
   const location = useLocation();
   const navigate = useNavigate();
@@ -103,4 +103,6 @@ export default function ResourceView({ selectedResource }: ResourceViewProps) {
       </SectionContainer>
     </ResourceViewContainer>
   );
-}
+};
+
+export default ResourceView;

@@ -28,10 +28,10 @@ type SortingControlsProps = {
   setSortingMethod: (method: string) => void;
 };
 
-export default function SortingControls({
+const SortingControls = ({
   sortingMethod,
   setSortingMethod,
-}: SortingControlsProps) {
+}: SortingControlsProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
@@ -59,4 +59,6 @@ export default function SortingControls({
       </Selection>
     </Container>
   );
-}
+};
+
+export default SortingControls;

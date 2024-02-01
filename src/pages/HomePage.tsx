@@ -5,12 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { sortDataArray } from "../utils/helpers";
 import { fetchResources } from "../utils/api";
+import { ResourceType } from "../utils/types";
 
 import AddResource from "../components/AddResource";
 import SortingControls from "../components/SortingControls";
 import ResourceView from "../components/ResourceView";
 import ResourcesList from "../components/ResourcesList";
-import { ResourceType } from "../utils/types";
 
 const Container = styled.div`
   display: flex;

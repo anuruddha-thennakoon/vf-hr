@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { fetchResource } from "../utils/api";
 import { styled } from "styled-components";
