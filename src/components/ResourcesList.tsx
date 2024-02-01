@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { ResourceType } from "../utils/types";
 
@@ -19,14 +17,7 @@ type ResourcesListProps = {
 };
 
 const ResourcesList = ({ resourceData, onClick }: ResourcesListProps) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const sortParam = queryParams.get("sort");
-
   const handleResourceClick = (resource: ResourceType) => {
-    queryParams.set("resourceId", resource?.id);
-    navigate(`?${queryParams.toString()}`);
     onClick(resource);
   };
 

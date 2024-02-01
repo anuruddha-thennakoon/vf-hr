@@ -31,12 +31,22 @@ const Selection = styled.span`
   background-color: ${(props) => (props.active ? "#6852e2" : "initial")};
   color: ${(props) => (props.active ? "white" : "initial")};
 `;
+const SectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+const Sections = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 type ResourceViewProps = {
   selectedResource: ResourceType;
 };
 
 export default function ResourceView({ selectedResource }: ResourceViewProps) {
+  console.log("selectedResource", selectedResource);
   const location = useLocation();
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
@@ -74,8 +84,8 @@ export default function ResourceView({ selectedResource }: ResourceViewProps) {
         <InitialsAvatar name={name} />
         {name}
       </AvatarContainer>
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <SectionContainer>
+        <Sections>
           <Selection
             active={currentSection === "overview"}
             onClick={() => handleSelection("overview")}
@@ -88,9 +98,9 @@ export default function ResourceView({ selectedResource }: ResourceViewProps) {
           >
             Skills
           </Selection>
-        </div>
-        <div>{renderSection()}</div>
-      </div>
+        </Sections>
+        <>{renderSection()}</>
+      </SectionContainer>
     </ResourceViewContainer>
   );
 }

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { sortDataArray } from "../utils/helpers";
 import { fetchResources } from "../utils/api";
@@ -56,6 +56,7 @@ const Name = styled.div`
 
 const HomePage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const resourceId = queryParams.get("resourceId");
   const sort = queryParams.get("sort") || "asc";
@@ -92,6 +93,9 @@ const HomePage = () => {
   }, [resourceData, sortingMethod]);
 
   const handleResourceClick = (resource: ResourceType) => {
+    queryParams.set("resourceId", resource?.id);
+    navigate(`?${queryParams.toString()}`);
+
     setSelectedResource(resource);
   };
 
@@ -105,7 +109,12 @@ const HomePage = () => {
 
   return (
     <>
-      {isOpen && <AddResource handleDisplayModal={handleDisplayModal} />}
+      {isOpen && (
+        <AddResource
+          handleDisplayModal={handleDisplayModal}
+          handleResourceClick={handleResourceClick}
+        />
+      )}
       <Container>
         <ResourceContainer>
           <VFLogo>

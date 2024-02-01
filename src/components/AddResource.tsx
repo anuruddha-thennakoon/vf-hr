@@ -98,9 +98,13 @@ const Alert = styled.div`
 
 type AddResourceProps = {
   handleDisplayModal: () => void;
+  handleResourceClick: (resource: ResourceType) => void;
 };
 
-const AddResource = ({ handleDisplayModal }: AddResourceProps) => {
+const AddResource = ({
+  handleDisplayModal,
+  handleResourceClick,
+}: AddResourceProps) => {
   const queryClient = useQueryClient();
   const { data: skills } = useQuery(["skills"], fetchAllSkills);
 
@@ -114,8 +118,12 @@ const AddResource = ({ handleDisplayModal }: AddResourceProps) => {
 
   const { mutateAsync: addResourceData, isLoading } = useMutation({
     mutationFn: (formData: FormFields) => addResource(formData),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["resources"], { exact: true });
+    onSuccess: (data, vaiables) => {
+      queryClient.invalidateQueries(["resources"], ["resource", data.id]);
+      handleResourceClick({
+        id: data.id,
+        name: `${vaiables.firstname} ${vaiables.lastname}`,
+      });
       handleDisplayModal();
     },
   });
