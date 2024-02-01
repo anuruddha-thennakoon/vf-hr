@@ -46,7 +46,6 @@ type ResourceViewProps = {
 };
 
 const ResourceView = ({ selectedResource }: ResourceViewProps) => {
-  console.log("selectedResource", selectedResource);
   const location = useLocation();
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
