@@ -1,23 +1,9 @@
 import { useQuery } from "react-query";
-import { fetchResource } from "../utils/api";
-import { styled } from "styled-components";
+
 import Loader from "./shared/Loader";
 import Error from "./shared/Error";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-`;
-const Label = styled.div`
-  font-size: 16px;
-  margin-top: 20px;
-`;
-const Content = styled.div`
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 6px;
-`;
+import { fetchResource } from "../utils/api";
 
 type ResourcesListProps = {
   resourceId: string;
@@ -43,12 +29,12 @@ const ResourceOverview = ({ resourceId }: ResourcesListProps) => {
   }
 
   return (
-    <Container>
-      <Label>Role</Label>
-      <Content>{resourceData?.role}</Content>
-      <Label>Email</Label>
-      <Content>{resourceData?.email}</Content>
-    </Container>
+    <div className="mt-5">
+      <div className="font-bold text-lg mt-2">Role</div>
+      <div className="text-lg mt-1">{resourceData?.role}</div>
+      <div className="font-bold text-lg mt-2">Email</div>
+      <div className="text-lg mt-1">{resourceData?.email}</div>
+    </div>
   );
 };
 

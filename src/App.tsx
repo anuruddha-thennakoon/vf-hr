@@ -1,4 +1,3 @@
-import "./App.css";
 import "react-initials-avatar/lib/ReactInitialsAvatar.css";
 
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";

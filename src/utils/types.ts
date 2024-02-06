@@ -13,5 +13,5 @@ export type FormFields = {
     lastname: string;
     email: string;
     role: string;
-    skills: SkillType[] | boolean[];
+    skills: SkillType[];
 };

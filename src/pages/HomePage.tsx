@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { styled } from "styled-components";
 import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -11,48 +10,6 @@ import AddResource from "../components/AddResource";
 import SortingControls from "../components/SortingControls";
 import ResourceView from "../components/ResourceView";
 import ResourcesList from "../components/ResourcesList";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-`;
-const ResourceContainer = styled.div`
-  background-color: #e1e1e1;
-  width: 250px;
-  padding: 60px;
-`;
-const Button = styled.button`
-  background-color: #6852e2;
-  color: white;
-  padding: 10px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 250px;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 25px;
-`;
-const VFLogo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-`;
-const Logo = styled.div`
-  display: flex;
-  background-color: #6852e2;
-  color: white;
-  font-size: 34px;
-  padding: 10px;
-  border-radius: 12px;
-`;
-const Name = styled.div`
-  display: flex;
-  font-size: 30px;
-  text-transform: uppercase;
-`;
 
 const HomePage = () => {
   const location = useLocation();
@@ -115,12 +72,14 @@ const HomePage = () => {
           handleResourceClick={handleResourceClick}
         />
       )}
-      <Container>
-        <ResourceContainer>
-          <VFLogo>
-            <Logo>VF</Logo>
-            <Name>Resourcing</Name>
-          </VFLogo>
+      <div className="flex flex-row h-screen">
+        <div className="bg-gray-300 p-16">
+          <div className="flex items-center gap-2">
+            <div className="bg-purple-600 text-white font-bold text-2xl p-4 rounded-lg">
+              VF
+            </div>
+            <div className="text-2xl uppercase">Resourcing</div>
+          </div>
           <SortingControls
             sortingMethod={sortingMethod}
             setSortingMethod={setSortingMethod}
@@ -129,10 +88,16 @@ const HomePage = () => {
             resourceData={sortedData}
             onClick={handleResourceClick}
           />
-          <Button onClick={handleDisplayModal}>+ New Resource</Button>
-        </ResourceContainer>
+          <button
+            type="button"
+            className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-auto mt-4 absolute bottom-4"
+            onClick={handleDisplayModal}
+          >
+            + New Resource
+          </button>
+        </div>
         <ResourceView selectedResource={selectedResource} />
-      </Container>
+      </div>
     </>
   );
 };

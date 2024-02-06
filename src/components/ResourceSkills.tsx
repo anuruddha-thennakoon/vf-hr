@@ -1,23 +1,10 @@
 import { useQuery } from "react-query";
-import { fetchSkills } from "../utils/api";
 
-import { styled } from "styled-components";
 import Error from "./shared/Error";
 import Loader from "./shared/Loader";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-`;
-const List = styled.ul`
-  padding-left: 18px;
-`;
-const ListItem = styled.li`
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 6px;
-`;
+import { SkillType } from "../utils/types";
+import { fetchSkills } from "../utils/api";
 
 type ResourceSkillsProps = {
   resourceId: string;
@@ -44,13 +31,15 @@ const ResourceSkills = ({ resourceId }: ResourceSkillsProps) => {
   }
 
   return (
-    <Container>
-      <List>
-        {resourceData.map((skill: any, index: any) => (
-          <ListItem key={index}>{skill?.name}</ListItem>
+    <div className="flex mt-5">
+      <ul className="pl-5">
+        {resourceData.map((skill: SkillType, index: number) => (
+          <li key={index} className="text-lg mt-2">
+            {skill?.name}
+          </li>
         ))}
-      </List>
-    </Container>
+      </ul>
+    </div>
   );
 };
 

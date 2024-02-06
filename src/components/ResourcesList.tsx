@@ -1,15 +1,4 @@
-import { styled } from "styled-components";
 import { ResourceType } from "../utils/types";
-
-const ListContainer = styled.div`
-  margin-top: 40px;
-`;
-
-const ListItem = styled.div`
-  padding: 12px;
-  border-bottom: 1px solid #bebebe;
-  cursor: pointer;
-`;
 
 type ResourcesListProps = {
   resourceData: ResourceType[];
@@ -22,16 +11,17 @@ const ResourcesList = ({ resourceData, onClick }: ResourcesListProps) => {
   };
 
   return (
-    <ListContainer>
+    <div className="mt-10">
       {resourceData?.map((resource: ResourceType) => (
-        <ListItem
+        <div
           key={resource.id}
           onClick={() => handleResourceClick(resource)}
+          className="p-3 border-b border-gray-400 cursor-pointer"
         >
-          {resource.name}
-        </ListItem>
+          <span className="text-lg">{resource.name}</span>
+        </div>
       ))}
-    </ListContainer>
+    </div>
   );
 };
 

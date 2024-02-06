@@ -1,27 +1,4 @@
-//@ts-nocheck
 import { useLocation, useNavigate } from "react-router-dom";
-import { styled } from "styled-components";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  justify-content: right;
-  align-items: center;
-  margin-top: 30px;
-`;
-const Selection = styled.span`
-  padding: 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 28px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: bold;
-  border: 1px solid #bebebe;
-  background-color: ${(props) => (props.active ? "#6852e2" : "initial")};
-  color: ${(props) => (props.active ? "white" : "initial")};
-`;
 
 type SortingControlsProps = {
   sortingMethod: string;
@@ -43,21 +20,29 @@ const SortingControls = ({
   };
 
   return (
-    <Container>
-      SORT
-      <Selection
-        active={sortingMethod === "asc"}
+    <div className="flex gap-1 justify-end items-center mt-5">
+      <span className="text-sm font-semibold">SORT</span>
+      <span
+        className={`px-2 py-1 rounded-md cursor-pointer text-xs font-bold border border-gray-300 ${
+          sortingMethod === "asc"
+            ? "bg-indigo-600 text-white"
+            : "bg-transparent text-gray-700"
+        }`}
         onClick={() => handleSorting("asc")}
       >
         A-Z
-      </Selection>
-      <Selection
-        active={sortingMethod === "desc"}
+      </span>
+      <span
+        className={`px-2 py-1 rounded-md cursor-pointer text-xs font-bold border border-gray-300 ${
+          sortingMethod === "desc"
+            ? "bg-indigo-600 text-white"
+            : "bg-transparent text-gray-700"
+        }`}
         onClick={() => handleSorting("desc")}
       >
         Z-A
-      </Selection>
-    </Container>
+      </span>
+    </div>
   );
 };
 
