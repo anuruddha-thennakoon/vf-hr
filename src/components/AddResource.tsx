@@ -1,8 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { addResource, fetchAllSkills } from "../utils/api";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { FormFields, ResourceType, SkillType } from "../utils/types";
-import { extractSelectedItems, isValidEmail } from "../utils/helpers";
+import {
+  extractSelectedItems,
+  getErrorMessage,
+  isValidEmail,
+} from "../utils/helpers";
 
 type AddResourceProps = {
   handleDisplayModal: () => void;
@@ -36,24 +40,25 @@ const AddResource = ({
     },
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit = async (data: FormFields) => {
     try {
-      if (!data.skills?.find((item: any) => item === true)) {
-        throw new Error("Atleast one skill should selected");
+      const formSkills = data.skills as boolean[];
+      if (!formSkills?.some((item) => item === true)) {
+        throw new Error("At least one skill should be selected");
       }
 
-      const _skills = extractSelectedItems(skills, data.skills);
+      const _skills = extractSelectedItems(skills, formSkills);
       const finalData = {
         email: data.email,
         firstname: data.firstname,
         lastname: data.lastname,
         role: data.role,
-        skills: _skills as unknown as SkillType[],
+        skills: _skills,
       };
       await addResourceData(finalData);
     } catch (error) {
       setError("root", {
-        message: (error as Error).message,
+        message: getErrorMessage(error),
       });
     }
   };

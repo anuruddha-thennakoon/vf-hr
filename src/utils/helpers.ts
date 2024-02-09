@@ -1,3 +1,5 @@
+import { SkillType } from "./types";
+
 export const sortDataArray = (array: [], sortingMethod: string) => {
     const sortedData = [...array];
     sortedData.sort((a: any, b: any) => {
@@ -15,20 +17,34 @@ export const isValidEmail = (email: string) => {
     return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
 }
 
-export const extractSelectedItems = <T extends { id: string }>(
-    data: T[],
-    isSelected: any[]
-): string[] => {
-    if (isSelected.length !== data.length) {
+export const extractSelectedItems = (
+    data: SkillType[],
+    selected: boolean[]
+): number[] => {
+    if (selected.length !== data.length) {
         throw new Error('isSelected array must have the same length as data');
     }
 
-    const selectedIds = data.reduce((acc, item, index) => {
-        if (isSelected[index]) {
+    const selectedIds = data.reduce((acc: number[], item: SkillType, index: number) => {
+        if (selected[index]) {
             acc.push(item.id);
         }
         return acc;
-    }, [] as string[]);
+    }, []);
 
     return selectedIds;
 };
+
+export const getErrorMessage = (error: unknown): string => {
+    let message: string;
+    if (error instanceof Error) {
+        message = error.message;
+    } else if (error && typeof error === 'object' && 'message' in error) {
+        message = String(error.message);
+    } else if (typeof error === 'string') {
+        message = error;
+    } else {
+        message = 'Something went wrong';
+    }
+    return message;
+}
